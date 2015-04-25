@@ -1,0 +1,3 @@
+'.source.js.oj':
+  'editor':
+    'foldEndPattern': '(?<!\\*)\\*\\*/|^\\s*\\}|^@end\\b'

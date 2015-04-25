@@ -1,0 +1,251 @@
+'fileTypes': [
+  'oj'
+]
+'name': 'JavaScript (OJ)'
+'patterns': [
+  {
+    'begin': '((@)(implementation))\\s+([A-Za-z][A-Za-z0-9]*)\\s*(?::\\s*([A-Za-z][A-Za-z0-9]*))?'
+    'captures':
+      '1':
+        'name': 'storage.type.js.oj'
+      '2':
+        'name': 'punctuation.definition.storage.type.js.oj'
+      '4':
+        'name': 'entity.name.type.js.oj'
+      '5':
+        'name': 'entity.other.inherited-class.js.oj'
+    'contentName': 'meta.scope.implementation.js.oj'
+    'end': '((@)end)\\b'
+    'name': 'meta.implementation.js.oj'
+    'patterns': [
+      {
+        'include': '#special_variables'
+      }
+      {
+        'include': '#method'
+      }
+      {
+        'include': '$base'
+      }
+    ]
+  }
+  {
+    'begin': '"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.js.oj'
+    'end': '"'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.js.oj'
+    'name': 'string.quoted.double.js.oj'
+    'patterns': [
+      {
+        'match': '\\\\(\\\\|[abefnrtv\'"?]|[0-3]\\d{0,2}|[4-7]\\d?|x[a-zA-Z0-9]+)'
+        'name': 'constant.character.escape.js.oj'
+      }
+      {
+        'match': '\\\\.'
+        'name': 'invalid.illegal.unknown-escape.js.oj'
+      }
+    ]
+  }
+  {
+    'begin': '\\b(id)\\s*(?=<)'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.js.oj'
+    'end': '(?<=>)'
+    'name': 'meta.id-with-protocol.js.oj'
+    'patterns': [
+      {
+        'include': '#protocol_list'
+      }
+    ]
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.keyword.js.oj'
+    'match': '(@)(try|catch|finally|throw|class|typedef|enum|const)\\b'
+    'name': 'keyword.control.exception.js.oj'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.keyword.js.oj'
+    'match': '(@)(synchronized)\\b'
+    'name': 'keyword.control.synchronize.js.oj'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.keyword.js.oj'
+    'match': '(@)(defs|encode)\\b'
+    'name': 'keyword.other.js.oj'
+  }
+  {
+    'captures':
+      '2':
+        'name': 'meta.id-type.js.oj'
+    'match': '\\b(void|BOOL|SEL|id(?!\\s?<)|unichar|IMP|Class)\\b'
+    'name': 'storage.type.js.oj'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.storage.modifier.js.oj'
+    'match': '(@)(synchronized|public|private|protected)\\b'
+    'name': 'storage.modifier.js.oj'
+  }
+  {
+    'match': '\\b(YES|NO|Nil|nil|true|false)\\b'
+    'name': 'constant.language.js.oj'
+  }
+  {
+    'include': '#bracketed_content'
+  }
+  {
+    'include': 'source.js'
+  }
+]
+'repository':
+  'bracketed_content':
+    'begin': '\\['
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.scope.begin.js.oj'
+    'end': '\\]'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.scope.end.js.oj'
+    'name': 'meta.bracketed.js.oj'
+    'patterns': [
+      {
+        'begin': '(?=\\w)(?<=[\\w\\])"] )(\\w+(?:(:)|(?=\\])))'
+        'beginCaptures':
+          '1':
+            'name': 'support.function.any-method.js.oj'
+          '2':
+            'name': 'punctuation.separator.arguments.js.oj'
+        'end': '(?=\\])'
+        'name': 'meta.function-call.js.oj'
+        'patterns': [
+          {
+            'captures':
+              '1':
+                'name': 'punctuation.separator.arguments.js.oj'
+            'match': '\\b\\w+(:)'
+            'name': 'support.function.any-method.name-of-parameter.js.oj'
+          }
+          {
+            'include': '#special_variables'
+          }
+          {
+            'include': '$base'
+          }
+        ]
+      }
+      {
+        'include': '#special_variables'
+      }
+      {
+        'include': '$base'
+      }
+    ]
+  'comment':
+    'patterns': [
+      {
+        'begin': '/\\*'
+        'captures':
+          '0':
+            'name': 'punctuation.definition.comment.js.oj'
+        'end': '\\*/'
+        'name': 'comment.block.js.oj'
+      }
+      {
+        'begin': '(^[ \\t]+)?(?=//)'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.whitespace.comment.leading.js.oj'
+        'end': '(?!\\G)'
+        'patterns': [
+          {
+            'begin': '//'
+            'beginCaptures':
+              '0':
+                'name': 'punctuation.definition.comment.js.oj'
+            'end': '\\n'
+            'name': 'comment.line.double-slash.js.oj'
+            'patterns': [
+              {
+                'match': '(?>\\\\\\s*\\n)'
+                'name': 'punctuation.separator.continuation.js.oj'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  'method':
+    'begin': '^(-|\\+)\\s*'
+    'end': '(?=\\{)|;'
+    'name': 'meta.function.js.oj'
+    'patterns': [
+      {
+        'begin': '(\\()'
+        'captures':
+          '1':
+            'name': 'punctuation.definition.type.js.oj'
+          '2':
+            'name': 'entity.name.function.js.oj'
+        'end': '(\\))\\s*(\\w+\\b)'
+        'name': 'meta.return-type.js.oj'
+        'patterns': [
+          {
+            'include': '$base'
+          }
+        ]
+      }
+      {
+        'match': '\\b\\w+(?=:)'
+        'name': 'entity.name.function.name-of-parameter.js.oj'
+      }
+      {
+        'begin': '((:))\\s*(\\()'
+        'beginCaptures':
+          '1':
+            'name': 'entity.name.function.name-of-parameter.js.oj'
+          '2':
+            'name': 'punctuation.separator.arguments.js.oj'
+          '3':
+            'name': 'punctuation.definition.type.js.oj'
+        'end': '(\\))\\s*(\\w+\\b)?'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.definition.type.js.oj'
+          '2':
+            'name': 'variable.parameter.function.js.oj'
+        'name': 'meta.argument-type.js.oj'
+        'patterns': [
+          {
+            'include': '$base'
+          }
+        ]
+      }
+      {
+        'include': '#comment'
+      }
+    ]
+  'special_variables':
+    'patterns': [
+      {
+        'match': '\\b_cmd\\b'
+        'name': 'variable.other.selector.js.oj'
+      }
+      {
+        'match': '\\b(self|super)\\b'
+        'name': 'variable.language.js.oj'
+      }
+    ]
+'scopeName': 'source.js.oj'
