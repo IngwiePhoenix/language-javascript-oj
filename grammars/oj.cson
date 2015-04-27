@@ -156,7 +156,7 @@
           "name": "punctuation.definition.storage.type.js.oj"
         }
       },
-      "match": "(@)(class|protocol)\\b",
+      "match": "(@)(protocol)\\b",
       "name": "storage.type.js.oj"
     },
     {
@@ -198,7 +198,7 @@
           "name": "punctuation.definition.storage.modifier.js.oj"
         }
       },
-      "match": "(@)(synchronized)\\b",
+      "match": "(@)(synchronized|const)\\b",
       "name": "storage.modifier.js.oj"
     },
     {
@@ -206,7 +206,27 @@
       "name": "constant.language.js.oj"
     },
     {
-        "include": "source.js"
+      "match": "(?<!\\.)\\b(super|this|self)(?!\\s*:)\\b",
+      "name": "variable.language.js.oj"
+    },
+    {
+      "match": "\\b(oj|BaseObject)\\b",
+      "name": "support.class.js.oj"
+    },
+    {
+      "match": "\\b(msgSend)\\b(?=\\()"
+      "name": "support.function.js.oj"
+    },
+    {
+      "match": "(?<!\\.)(@)(for|each)(?!\\s*:)\\b",
+      "name": "keyword.control.js.oj"
+    },
+    {
+      "match": "(@)(enum|class|squeeze|cast|typedef|options)\\b",
+      "name": "keyword.other.js.oj"
+    },
+    {
+      "include": "source.js"
     },
     {
       "include": "#bracketed_content"
