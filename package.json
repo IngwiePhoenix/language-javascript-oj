@@ -1,6 +1,6 @@
 {
   "name": "language-javascript-oj",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "OJ syntax highlighting",
   "repository": "https://github.com/IngwiePhoenix/language-javascript-oj",
   "license": "MIT",
