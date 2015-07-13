@@ -230,6 +230,56 @@
     },
     {
       "include": "#bracketed_content"
+    },
+    {
+      'begin': '^\\s*#\\s*(include|import)\\b\\s+'
+      'captures':
+        '1':
+          'name': 'keyword.control.import.include.oj'
+      'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
+      'name': 'meta.preprocessor.c.include'
+      'patterns': [
+        {
+          'match': '(?>\\\\\\s*\\n)'
+          'name': 'punctuation.separator.continuation.oj'
+        }
+        {
+          'begin': '"'
+          'beginCaptures':
+            '0':
+              'name': 'punctuation.definition.string.begin.oj'
+          'end': '"'
+          'endCaptures':
+            '0':
+              'name': 'punctuation.definition.string.end.oj'
+          'name': 'string.quoted.double.include.oj'
+        }
+        {
+          'begin': '<'
+          'beginCaptures':
+            '0':
+              'name': 'punctuation.definition.string.begin.oj'
+          'end': '>'
+          'endCaptures':
+            '0':
+              'name': 'punctuation.definition.string.end.oj'
+          'name': 'string.quoted.other.lt-gt.include.oj'
+        }
+      ]
+    }
+    {
+      'begin': '^\\s*#\\s*(define|defined|elif|else|if|ifdef|ifndef|undef)\\b'
+      'captures':
+        '1':
+          'name': 'keyword.control.import.oj'
+      'end': '(?=(?://|/\\*))|(?<!\\\\)(?=\\n)'
+      'name': 'meta.preprocessor.oj'
+      'patterns': [
+        {
+          'match': '(?>\\\\\\s*\\n)'
+          'name': 'punctuation.separator.continuation.oj'
+        }
+      ]
     }
   ],
   "repository": {
